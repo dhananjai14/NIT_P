@@ -1,5 +1,4 @@
-
-Entire code is made to run in R markdown
+ENTIRE code is made to run on R Markdown
 
 ---
 title: "Order Forecast in Oasis Store"
@@ -104,6 +103,7 @@ predict_custom = predict(model_custom, newdata = oasis_custom_test)
 result_custom = data.frame(date =oasis_custom_test$Date ,actual = oasis_custom_test$Custom.Accessory, predicted_custom = round(predict_custom, 0), err = oasis_custom_test$Custom.Accessory-predict_custom)
 rsme_custom = sqrt(mean(result_custom$err^2))
 
+ggplot(result_custom, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_custom, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_custom))  + labs(title = "Predicted and actual order of Item Category: Custom",caption = "Figure1: Date wise actual and predicted order quantity of Item Category: Custom" ,x = "Date", y = "Order of Item Category: Custom", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 ### Display.Adapter
@@ -126,6 +126,8 @@ predict_disp = predict(model_disp, newdata = oasis_disp_test)
 
 result_disp = data.frame(date =oasis_disp_test$Date, actual = oasis_disp_test$Display.Adapter, predicted_disp = round(predict_disp,0), err = oasis_disp_test$Display.Adapter-predict_disp)
 rsme_disp = sqrt(mean(result_disp$err^2))
+
+ggplot(result_disp, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_disp, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_disp))  + labs(title = "Predicted and actual order of Item Category: Disply Adapter",caption = "Figure2: Date wise actual and predicted order quantity of Item Category: Display Adapter" ,x = "Date", y = "Order of Item Category: Display adapter", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 
 ```
 
@@ -151,6 +153,7 @@ predict_headset = predict(model_headset, newdata = oasis_headset_test)
 result_headset = data.frame(date =oasis_headset_test$Date, actual = oasis_headset_test$Headset, predicted_headset = round(predict_headset,0), err = oasis_headset_test$Headset-predict_headset)
 rsme_headset = sqrt(mean(result_headset$err^2))
 
+ggplot(result_headset, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_headset, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_headset))  + labs(title = "Predicted and actual order of Item Category: Headset",caption = "Figure3: Date wise actual and predicted order quantity of Item Category: Headset" ,x = "Date", y = "Order of Item Category: Headset", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 ### Keyboard 
@@ -174,6 +177,8 @@ predict_keyboard = predict(model_keyboard, newdata = oasis_keyboard_test)
 
 result_keyboard = data.frame(date =oasis_keyboard_test$Date, actual = oasis_keyboard_test$Keyboard, predicted_keyboard = round(predict_keyboard,0), err = oasis_keyboard_test$Keyboard-predict_keyboard)
 rsme_keyboard = sqrt(mean(result_keyboard$err^2))
+
+ggplot(result_keyboard, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_keyboard, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_keyboard))  + labs(title = "Predicted and actual order of Item Category: Keyboard",caption = "Figure4: Date wise actual and predicted order quantity of Item Category: Keyboard", x = "Date", y = "Order of Item Category: Display adapter", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 
 ```
 
@@ -199,6 +204,8 @@ predict_keyboard_mouse = predict(model_keyboard_mouse, newdata = oasis_keyboard_
 result_keyboard_mouse = data.frame(date =oasis_keyboard_mouse_test$Date, actual = oasis_keyboard_mouse_test$Keyboard, predicted_keyboard_mouse = round(predict_keyboard_mouse,0), err = oasis_keyboard_mouse_test$Keyboard.and.Mouse-predict_keyboard_mouse)
 rsme_keyboard_mouse = sqrt(mean(result_keyboard_mouse$err^2))
 
+ggplot(result_keyboard_mouse, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_keyboard_mouse, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_keyboard_mouse))  + labs(title = "Predicted and actual order of Item Category: Disply Adapter",caption = "Figure5: Date wise actual and predicted order quantity of Item Category: Keyboard and Mouse" ,x = "Date", y = "Order of Item Category: Keyboard and Mouse", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
+
 ```
 
 ### Laptop
@@ -223,6 +230,8 @@ predict_laptop = predict(model_laptop, newdata = oasis_laptop_test)
 result_laptop = data.frame(date =oasis_laptop_test$Date, actual = oasis_laptop_test$Laptop, predicted_laptop = round(predict_laptop,0), err = oasis_laptop_test$Laptop-predict_laptop)
 rsme_laptop = sqrt(mean(result_laptop$err^2))
 
+ggplot(result_laptop, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_laptop, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_laptop))  + labs(title = "Predicted and actual order of Item Category: Laptop",caption = "Figure6: Date wise actual and predicted order quantity of Item Category: Laptop" ,x = "Date", y = "Order of Item Category: Laptop", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
+
 ```
 
 ### Laptop.Stand
@@ -245,6 +254,8 @@ predict_laptop_stand = predict(model_laptop_stand, newdata = oasis_laptop_stand_
 
 result_laptop_stand = data.frame(date =oasis_laptop_stand_test$Date, actual = oasis_laptop_stand_test$Laptop.Stand, predicted_laptop_stand = round(predict_laptop_stand,0), err = oasis_laptop_stand_test$Laptop.Stand-predict_laptop_stand)
 rsme_laptop_stand = sqrt(mean(result_laptop_stand$err^2))
+
+ggplot(result_laptop_stand, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_laptop_stand, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_laptop_stand))  + labs(title = "Predicted and actual order of Item Category: Laptop stand",caption = "Figure7: Date wise actual and predicted order quantity of Item Category: Laptop stand" ,x = "Date", y = "Order of Item Category: Laptop stand", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 
 ```
 
@@ -270,6 +281,8 @@ predict_monitor = predict(model_monitor, newdata = oasis_monitor_test)
 result_monitor = data.frame(date =oasis_laptop_stand_test$Date, actual = oasis_monitor_test$Monitor, predicted_monitor = round(predict_monitor,0), err = oasis_monitor_test$Monitor-predict_monitor)
 rsme_monitor = sqrt(mean(result_laptop_stand$err^2))
 
+ggplot(result_monitor, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_monitor, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_monitor))  + labs(title = "Predicted and actual order of Item Category: Monitor",caption = "Figure8: Date wise actual and predicted order quantity of Item Category: Monitor" ,x = "Date", y = "Order of Item Category: Monitor", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
+
 ```
 
 ### Mouse
@@ -293,6 +306,9 @@ predict_mouse = predict(model_mouse, newdata = oasis_mouse_test)
 
 result_mouse = data.frame(date =oasis_mouse_test$Date, actual = oasis_mouse_test$Mouse, predicted_mouse = round(predict_mouse,0), err = oasis_mouse_test$Mouse-predict_mouse)
 rsme_mouse = sqrt(mean(result_mouse$err^2))
+
+ggplot(result_mouse, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_mouse, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_mouse))  + labs(title = "Predicted and actual order of Item Category: Mouse",caption = "Figure9: Date wise actual and predicted order quantity of Item Category: Mouse" ,x = "Date", y = "Order of Item Category: Mouse", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
+
 ```
 
 ### Multiport.Adapter
@@ -317,6 +333,7 @@ predict_multiport = predict(model_multiport, newdata = oasis_multiport_test)
 result_multiport = data.frame(date =oasis_multiport_test$Date, actual = oasis_multiport_test$Multiport.Adapter, predicted_multiport = round(predict_multiport,0), err = oasis_multiport_test$Multiport.Adapter-predict_multiport)
 rsme_multiport = sqrt(mean(result_multiport$err^2))
 
+ggplot(result_multiport, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_multiport, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_multiport))  + labs(title = "Predicted and actual order of Item Category: Multiport Adapter",caption = "Figure10: Date wise actual and predicted order quantity of Item Category: Multiport Adapter" ,x = "Date", y = "Order of Item Category: Multiport Adapter", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 ### Power.Adapter
@@ -341,6 +358,8 @@ predict_Adapter = predict(model_Adapter, newdata = oasis_Adapter_test)
 result_Adapter = data.frame(date =oasis_Adapter_test$Date, actual = oasis_Adapter_test$Power.Adapter, predicted_adapter = round(predict_Adapter,0), err = oasis_Adapter_test$Power.Adapter-predict_Adapter)
 rsme_Adapter = sqrt(mean(result_Adapter$err^2))
 
+
+ggplot(result_Adapter, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_adapter, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_adapter))  + labs(title = "Predicted and actual order of Item Category: Power Adapter",caption = "Figure11: Date wise actual and predicted order quantity of Item Category: Power Adapter" ,x = "Date", y = "Order of Item Category: Power Adapter", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 ### Speakerphone
@@ -365,6 +384,7 @@ predict_Speaker = predict(model_Speaker, newdata = oasis_Speaker_test)
 result_Speaker = data.frame(date =oasis_Speaker_test$Date, actual = oasis_Speaker_test$Speakerphone, predicted_speaker = round(predict_Speaker,0), err = oasis_Speaker_test$Speakerphone-predict_Speaker)
 rsme_Speaker = sqrt(mean(result_Speaker$err^2))
 
+ggplot(result_Speaker, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_speaker, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_speaker))  + labs(title = "Predicted and actual order of Item Category: Speakerphone",caption = "Figure12: Date wise actual and predicted order quantity of Item Category: Speakerphone" ,x = "Date", y = "Order of Item Category: Speakerphone", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 ### Trackpad 
@@ -389,6 +409,7 @@ predict_trackpad = predict(model_trackpad, newdata = oasis_trackpad_test)
 result_trackpad = data.frame(date =oasis_trackpad_test$Date, actual = oasis_trackpad_test$Trackpad, predicted_trackpad = round(predict_trackpad,0), err = oasis_trackpad_test$Trackpad-predict_trackpad)
 rsme_trackpad = sqrt(mean(result_trackpad$err^2))
 
+ggplot(result_trackpad, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_trackpad, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_trackpad))  + labs(title = "Predicted and actual order of Item Category: Trackpad",caption = "Figure13: Date wise actual and predicted order quantity of Item Category: Trackpad" ,x = "Date", y = "Order of Item Category: Trackpad", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 ### Webcam
@@ -413,6 +434,7 @@ predict_webcam = predict(model_webcam, newdata = oasis_webcam_test)
 result_webcam = data.frame(date =oasis_webcam_test$Date, actual = oasis_webcam_test$Webcam, predicted_webcam = round(predict_webcam,0), err = oasis_webcam_test$Webcam-predict_webcam)
 rsme_webcam = sqrt(mean(result_webcam$err^2))
 
+ggplot(result_webcam, aes(x = date)) + geom_bar(aes( y = actual, color = "Actual Order"), fill= "grey60", stat = "identity") + geom_line(aes(y = predicted_webcam, color = "Predicted Order"), size = 1.5)+geom_point(aes(y = predicted_webcam))  + labs(title = "Predicted and actual order of Item Category: Webcam",caption = "Figure14: Date wise actual and predicted order quantity of Item Category: Webcam" ,x = "Date", y = "Order of Item Category: Webcam", color = "Legend") + theme(legend.justification = c("right", "top"), legend.position = c(.98, .98)) + guides(fill=guide_legend(title=""))
 ```
 
 Individual item has been predicted. Now combining the result to get the final prediction.
@@ -451,11 +473,10 @@ a1 = cbind(a1, actual_order = b$Grand.Total)
 rmse = sqrt(mean(a1$actual_order-a1$total_prediction)^2)
 colnames(a1)
 
-ggplot(a1) + geom_bar(aes(x = date, y = actual_order, fill="Actual Order"),stat = "identity") + geom_line(aes(x = date, y = total_prediction), col = "black" ,size = 2) + labs(x = "date", y = "order" , title = "Actual and Predicted Order", subtitle = "Comparision of actual and predicted order of March 2022", caption = "Figure 1: Date wise actual and predicted order in month of March 2022.") + guides(fill=guide_legend(title="")) 
+ggplot(a1, aes(x = date)) + geom_bar(aes(y = actual_order, color="Actual Order"),fill = "grey60", stat = "identity") + geom_line(aes(y = total_prediction, color = "Predicted Order") ,size = 2) + geom_point(aes(y = total_prediction)) + labs(x = "Date", y = "Total Order: Day Wise" , title = "Total Order Actual and Predicted", subtitle = "Comparision of total order actual and predicted on the daily basis of March 2022", caption = "Figure 15: Summary of total order actual and predicted date wise of March 2022.", color = "Legend") +theme(legend.justification = c("right", "top"), legend.position = c(.98, .98))+ guides(fill=guide_legend(title="")) 
+
 
 ```
-
-
 
 
 
