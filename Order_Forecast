@@ -1,25 +1,75 @@
-# Order Forecast in Oasis Store
-Entire code is prepared in R Markdown
 ---
 title: "Order Forecast in Oasis Store"
 author: "D"
-date: "4/9/2022"
-output: html_document
+date: "4/11/2022"
+output: "github_document"
 ---
 
 **NOTE**: This project is part of VMware Campus Ambassador Program Virtual Hackathon
 
-# Overview
+# A. Overview
 
 Oasis Store is an internal e-commerce site in VMware to order IT Assets. VMware colleagues place order using the store of various IT assets like laptops, monitors etc.
 
 The complete analysis process is divided into several parts 
 
+# B. Background
+
+As a part of Hackathon, following things are evaluated
+
+1. Ordering pattern basis various KPI’s
+2. Ordering forecast basis various KPI’s
+
+# 1. Data Prepration
+
+### Data Source 
+
+Data is first party data as it is been generate within the VMware and hence the data is reliable.
+
+# 2. Data Processing 
+
+Data was checked for the possible errors and processed. Such processing was done on **MS Excel**. 
+
+##  2.1 Missing Values 
+
+Data source was looked for the missing values and were fixed.
+
+* Region column had blank spaces. Those were fixed on the basis of shipping country. 
+
+* Data set was searched for the blank row and was removed from analysis. 
+
+## Data format
+
+For the analysis purpose, the date time has changed to date only. 
+
+## Data Transformation 
+
+* Few item had zero cost. They were changed to the cost respective to the product. 
+* Data was analysed and found that various product could be covered under one umbrella. Like various laptop can be categorized in Laptop category. Similarly 14 different category has been created. They are **Custom.Accessory, Display.Adapter, Headset, Keyboard, Keyboard.and.Mouse, Laptop, Laptop.Stand, Monitor, Mouse, Multiport.Adapter, Power.Adapter, Speakerphone, Trackpad and Webcam**.
+
+* Using Pivot table, all the same type of order in a single was clubbed together. 
+
+# 3. Data Analysis
+
+Ordering pattern of the individual product is visualized through graph drawn **MS Excel**. Few of them are shown here
+
+**Conclude:** There is a seasonal relation between the 
+
+
+## Model Formation
+
+Linear model is used to predict the future order. **R Programming** language is used for model building and prediction.
+
+Since the data is available for only Sept 2021 to March 2022 so entire data set is used for training and for testing the data of March 2022 is used. 
+
 ## Import the data
-```{r}
+```{r warning=FALSE}
 oasis = read.csv("C:\\Users\\preet\\Desktop\\Project\\NITP Hackathon\\Hackathon Data Oasis Store v4.csv", stringsAsFactors = T)
 # Data manipulation 
-
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 oasis$Date = as.POSIXct(oasis$Date , format = c("%d-%m-%y"))
 oasis$month = as.factor(month(oasis$Date)) # Extracting month
 oasis$weekday = as.factor(wday(oasis$Date)) # Extracting weekday
@@ -27,9 +77,9 @@ oasis$week_num = as.factor(week(oasis$Date)) # extracting week_num
 
 ```
 
-# The future order of individual product is predicted.
+## The future order of individual product is predicted.
  
-## Custom Accessory
+### Custom Accessory
 
 ```{r}
 
@@ -49,11 +99,11 @@ predict_custom = predict(model_custom, newdata = oasis_custom_test)
 # Warning is given which is due to the reason that testing and training done on same data set.
 
 result_custom = data.frame(date =oasis_custom_test$Date ,actual = oasis_custom_test$Custom.Accessory, predicted_custom = round(predict_custom, 0), err = oasis_custom_test$Custom.Accessory-predict_custom)
-rsme_custom = sqrt(mean(custom_result$err^2))
+rsme_custom = sqrt(mean(result_custom$err^2))
 
 ```
 
-## Display.Adapter
+### Display.Adapter
 
 ```{r}
 # Analysis of the item Display.Adapter
@@ -76,7 +126,7 @@ rsme_disp = sqrt(mean(result_disp$err^2))
 
 ```
 
-## Headset
+### Headset
 
 ```{r}
 # Analysis of the item Headset
@@ -100,7 +150,7 @@ rsme_headset = sqrt(mean(result_headset$err^2))
 
 ```
 
-## Keyboard 
+### Keyboard 
 
 ```{r}
 # Analysis of the item keyboard
@@ -124,7 +174,7 @@ rsme_keyboard = sqrt(mean(result_keyboard$err^2))
 
 ```
 
-## Keyboard.and.Mouse 
+### Keyboard.and.Mouse 
 
 ```{r}
 # Analysis of the item keyboard and mouse
@@ -148,7 +198,7 @@ rsme_keyboard_mouse = sqrt(mean(result_keyboard_mouse$err^2))
 
 ```
 
-## Laptop
+### Laptop
 
 ```{r}
 # Analysis of the item Laptop
@@ -172,7 +222,7 @@ rsme_laptop = sqrt(mean(result_laptop$err^2))
 
 ```
 
-## Laptop.Stand
+### Laptop.Stand
 
 ```{r}
 # Analysis of the item Laptop stand
@@ -190,13 +240,12 @@ model_laptop_stand = lm(Laptop.Stand~month+weekday,  data = oasis_laptop_stand)
 predict_laptop_stand = predict(model_laptop_stand, newdata = oasis_laptop_stand_test)
 # Warning is given which is due to the reason that testing and training done on same data set.
 
-
 result_laptop_stand = data.frame(date =oasis_laptop_stand_test$Date, actual = oasis_laptop_stand_test$Laptop.Stand, predicted_laptop_stand = round(predict_laptop_stand,0), err = oasis_laptop_stand_test$Laptop.Stand-predict_laptop_stand)
 rsme_laptop_stand = sqrt(mean(result_laptop_stand$err^2))
 
 ```
 
-## Monitor
+### Monitor
 
 ```{r}
 # Analysis of the item Monitor
@@ -220,7 +269,7 @@ rsme_monitor = sqrt(mean(result_laptop_stand$err^2))
 
 ```
 
-## Mouse
+### Mouse
 
 ```{r}
 # Analysis of the item Laptop stand
@@ -243,7 +292,7 @@ result_mouse = data.frame(date =oasis_mouse_test$Date, actual = oasis_mouse_test
 rsme_mouse = sqrt(mean(result_mouse$err^2))
 ```
 
-## Multiport.Adapter
+### Multiport.Adapter
 
 ```{r}
 # Analysis of the item Multiport
@@ -267,7 +316,7 @@ rsme_multiport = sqrt(mean(result_multiport$err^2))
 
 ```
 
-## Power.Adapter
+### Power.Adapter
 
 ```{r}
 # Analysis of the item Power Adapter
@@ -291,7 +340,7 @@ rsme_Adapter = sqrt(mean(result_Adapter$err^2))
 
 ```
 
-## Speakerphone
+### Speakerphone
 
 ```{r}
 # Analysis of the item Speakerphone
@@ -315,7 +364,7 @@ rsme_Speaker = sqrt(mean(result_Speaker$err^2))
 
 ```
 
-## Trackpad 
+### Trackpad 
 
 ```{r}
 # Analysis of the item Trackpad
@@ -339,7 +388,7 @@ rsme_trackpad = sqrt(mean(result_trackpad$err^2))
 
 ```
 
-## Webcam
+### Webcam
 
 ```{r}
 # Analysis of the item Webcam
@@ -366,7 +415,7 @@ rsme_webcam = sqrt(mean(result_webcam$err^2))
 Individual item has been predicted. Now combining the result to get the final prediction.
 Combining the result
 
-## Combining the result
+### Combining the result
 
 ```{r}
 a1 = subset(oasis, oasis$Date > "2022-03-01")
@@ -399,8 +448,11 @@ a1 = cbind(a1, actual_order = b$Grand.Total)
 rmse = sqrt(mean(a1$actual_order-a1$total_prediction)^2)
 colnames(a1)
 
-
 ggplot(a1) + geom_bar(aes(x = date, y = actual_order, fill="Actual Order"),stat = "identity") + geom_line(aes(x = date, y = total_prediction), col = "black" ,size = 2) + labs(x = "date", y = "order" , title = "Actual and Predicted Order", subtitle = "Comparision of actual and predicted order of March 2022", caption = "Figure 1: Date wise actual and predicted order in month of March 2022.") + guides(fill=guide_legend(title="")) 
 
 ```
+
+
+
+
 
